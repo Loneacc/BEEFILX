@@ -3,31 +3,31 @@ window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 100) {
         navbar.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-    } 
+    }
 });
 
 // Movie card hover effect
 const movieCards = document.querySelectorAll('.movie-card');
 movieCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
+    card.addEventListener('mouseenter', function () {
         this.style.transform = 'scale(1.05)';
         this.style.zIndex = '1';
     });
 
-    card.addEventListener('mouseleave', function() {
+    card.addEventListener('mouseleave', function () {
         this.style.transform = 'scale(1)';
         this.style.zIndex = '0';
     });
 });
 
 // Search functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const searchBtn = document.querySelector('.search-btn');
     const searchBox = document.querySelector('.search-box');
     const searchInput = document.querySelector('.search-box input');
     const closeSearch = document.querySelector('.close-search');
 
-    searchBtn.addEventListener('click', function() {
+    searchBtn.addEventListener('click', function () {
         searchBox.classList.toggle('active');
         if (searchBox.classList.contains('active')) {
             setTimeout(() => {
@@ -38,13 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    closeSearch.addEventListener('click', function() {
+    closeSearch.addEventListener('click', function () {
         searchBox.classList.remove('active');
         searchInput.value = ''; // Clear input when closing
     });
 
     // Close search box when pressing Escape key
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && searchBox.classList.contains('active')) {
             searchBox.classList.remove('active');
             searchInput.value = ''; // Clear input when closing
@@ -68,7 +68,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Add loading animation for images
 const images = document.querySelectorAll('img');
 images.forEach(img => {
-    img.addEventListener('load', function() {
+    img.addEventListener('load', function () {
         this.style.opacity = '1';
     });
     img.style.opacity = '0';
@@ -76,7 +76,7 @@ images.forEach(img => {
 });
 
 // Slider functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const slides = document.querySelectorAll('.slide');
     const slideContents = document.querySelectorAll('.slide-content');
     const dots = document.querySelector('.slider-dots');
@@ -154,12 +154,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Force reflow to ensure the transition works
             textOverlay.offsetHeight;
             textOverlay.classList.remove('small');
-            
+
             // Clear any existing timeout
             if (textOverlayTimeout) {
                 clearTimeout(textOverlayTimeout);
             }
-            
+
             // Set new timeout for shrinking
             textOverlayTimeout = setTimeout(() => {
                 textOverlay.classList.add('small');
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Force reflow to ensure the transition works
         initialTextOverlay.offsetHeight;
         initialTextOverlay.classList.remove('small');
-        
+
         textOverlayTimeout = setTimeout(() => {
             initialTextOverlay.classList.add('small');
         }, 6000);
@@ -246,4 +246,13 @@ document.addEventListener('DOMContentLoaded', function () {
             header.classList.add('scrolled');
         }
     });
+});
+
+const header = document.getElementById('main-header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 });
