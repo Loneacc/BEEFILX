@@ -1,8 +1,8 @@
 :root {
     --primary-color: #e50914;
-    --secondary-color: #141414;
+    --secondary-color: #000000;
     --text-color: #ffffff;
-    --background-color: #555555;
+    --background-color: #141414;
 }
 
 * {
@@ -27,7 +27,7 @@ body {
     width: 100%;
     z-index: 1000;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-    transition: background 0.3s ease;
+    transition: background 0.5s ease;
 }
 
 #main-header.scrolled {
@@ -37,7 +37,7 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    padding: 1.5vw 2vw;
+    padding: 0.2vw 1.33vw;
     color: white;
 }
 
@@ -48,7 +48,7 @@ body {
 }
 
 .logo img {
-    height: 2.5em;
+    height: 4em;
     width: auto;
     object-fit: contain;
     display: block;
@@ -277,7 +277,7 @@ body {
 /* Hero Section with Slider */
 .hero {
     height: 80vh;
-    margin-top: 3.5em;
+    margin-top: 0px;
     position: relative;
     overflow: hidden;
 }
@@ -319,15 +319,24 @@ body {
     z-index: -1;
 }
 
+.slide.active .main-image {
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+    transition: box-shadow 0.5s ease-in-out;
+}
+
 .text-overlay {
     position: absolute;
     height: auto;
-    transition: width 0.7s cubic-bezier(0.4,0,0.2,1),
-                left 0.7s cubic-bezier(0.4,0,0.2,1),
-                top 0.7s cubic-bezier(0.4,0,0.2,1),
-                transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
     box-sizing: border-box;
+    will-change: transform, width, height, left, top;
+    opacity: 1;
+}
+
+.text-overlay.small {
+    height: auto;
+    opacity: 0.9;
 }
 
 .text-overlay-1 {
@@ -346,25 +355,23 @@ body {
 
 .text-overlay-3 {
     width: 38%;
-    left: 2vw;
+    left: 3vw;
     top: 30%;
     transform: translateY(-50%) scale(1);
 }
+
 .text-overlay-4 {
     width: 38%;
     left: -0.5vw;
     top: 35%;
     transform: translateY(-50%) scale(1);
 }
+
 .text-overlay-5 {
     width: 35%;
     left: 2vw;
     top: 28%;
     transform: translateY(-50%) scale(1);
-}
-
-.text-overlay.small {
-    height: auto;
 }
 
 .text-overlay-1.small {
@@ -411,7 +418,15 @@ body {
     z-index: 3;
     display: flex;
     flex-direction: row;
-    gap: 1.5em;
+    gap: 0em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.slide-content.active-content {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .play-btn {
@@ -433,6 +448,7 @@ body {
 }
 
 .slider-btn {
+    display: none;
     position: absolute;
     top: 60%;
     transform: translateY(-50%);
@@ -625,7 +641,7 @@ footer {
     font-size: 1.2em;
     font-weight: 500;
     border: none;
-    border-radius: 0.5em;
+    border-radius: 0.3em;
     padding: 0.8em 2.2em 0.8em 1.5em;
     margin-right: 0.8em;
     cursor: pointer;

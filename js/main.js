@@ -78,43 +78,43 @@ images.forEach(img => {
 // Slider functionality
 document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.slide');
+    const slideContents = document.querySelectorAll('.slide-content');
     const dots = document.querySelector('.slider-dots');
     const prevBtn = document.querySelector('.slider-btn.prev');
     const nextBtn = document.querySelector('.slider-btn.next');
     let currentSlide = 0;
     let slideInterval;
+    let textOverlayTimeout;
 
     // Create dots
     slides.forEach((_, index) => {
         const dot = document.createElement('div');
         dot.classList.add('dot');
         if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index, currentSlide < index ? 1 : -1)); // Pass direction on dot click
+        dot.addEventListener('click', () => goToSlide(index, currentSlide < index ? 1 : -1));
         dots.appendChild(dot);
     });
 
     // Function to go to specific slide
-    function goToSlide(newIndex, direction) { // direction: 1 for next, -1 for prev
+    function goToSlide(newIndex, direction) {
         const oldSlideIndex = currentSlide;
         let calculatedNewIndex = (newIndex + slides.length) % slides.length;
 
         // Set initial position for the new slide before it becomes active
         // and final position for the old slide as it exits
         slides.forEach((slide, index) => {
-            slide.classList.remove('active'); // Remove active from all
-            document.querySelectorAll('.dot')[index].classList.remove('active'); // Remove dot active
+            slide.classList.remove('active');
+            document.querySelectorAll('.dot')[index].classList.remove('active');
 
             if (index === oldSlideIndex) {
                 slide.style.transform = `translateX(${direction === 1 ? '-100%' : '100%'})`;
                 slide.style.opacity = '0';
                 slide.style.zIndex = '0';
             } else if (index === calculatedNewIndex) {
-                // For the incoming slide, set its starting position
                 slide.style.transform = `translateX(${direction === 1 ? '100%' : '-100%'})`;
-                slide.style.opacity = '0'; // Start invisible for transition
+                slide.style.opacity = '0';
                 slide.style.zIndex = '1';
             } else {
-                // Other slides are just off-screen (default to the 'next' direction side)
                 slide.style.transform = 'translateX(100%)';
                 slide.style.opacity = '0';
                 slide.style.zIndex = '0';
@@ -124,32 +124,57 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update currentSlide and then set active state for the new slide
         currentSlide = calculatedNewIndex;
 
-        // Force reflow to ensure the initial transform is applied before the final one
-        slides[currentSlide].offsetWidth; // Triggers reflow
+        // Force reflow
+        slides[currentSlide].offsetWidth;
 
         slides[currentSlide].style.transform = 'translateX(0)';
         slides[currentSlide].style.opacity = '1';
-        slides[currentSlide].classList.add('active'); // Add active to the new slide
-        document.querySelectorAll('.dot')[currentSlide].classList.add('active'); // Add dot active
+        slides[currentSlide].classList.add('active');
+        document.querySelectorAll('.dot')[currentSlide].classList.add('active');
 
-        // Reset text overlay animation for the new slide
+        // Clear any existing text overlay timeout
+        if (textOverlayTimeout) {
+            clearTimeout(textOverlayTimeout);
+        }
+
+        // Hide all slide contents
+        slideContents.forEach(content => {
+            content.classList.remove('active-content');
+        });
+
+        // Show the slide content for the new slide
+        const newSlideContent = document.querySelector(`.slide-content[data-slide-index="${currentSlide}"]`);
+        if (newSlideContent) {
+            newSlideContent.classList.add('active-content');
+        }
+
+        // Handle text overlay animation
         const textOverlay = slides[currentSlide].querySelector('.text-overlay');
         if (textOverlay) {
+            // Force reflow to ensure the transition works
+            textOverlay.offsetHeight;
             textOverlay.classList.remove('small');
-            setTimeout(() => {
+            
+            // Clear any existing timeout
+            if (textOverlayTimeout) {
+                clearTimeout(textOverlayTimeout);
+            }
+            
+            // Set new timeout for shrinking
+            textOverlayTimeout = setTimeout(() => {
                 textOverlay.classList.add('small');
-            }, 5000);
+            }, 6000);
         }
     }
 
     // Next slide
     function nextSlide() {
-        goToSlide(currentSlide + 1, 1); // Pass direction 1 for next
+        goToSlide(currentSlide + 1, 1);
     }
 
     // Previous slide
     function prevSlide() {
-        goToSlide(currentSlide - 1, -1); // Pass direction -1 for prev
+        goToSlide(currentSlide - 1, -1);
     }
 
     // Event listeners for buttons
@@ -177,38 +202,37 @@ document.addEventListener('DOMContentLoaded', function() {
         // slideInterval = setInterval(nextSlide, 10000);
     }
 
-    // Initial setup: 
-    // Position all slides initially. The first one is active.
+    // Initial setup
     slides.forEach((slide, index) => {
         if (index === 0) {
             slide.style.transform = 'translateX(0)';
             slide.style.opacity = '1';
             slide.style.zIndex = '1';
             slide.classList.add('active');
-            document.querySelectorAll('.dot')[0].classList.add('active'); // Activate first dot
+            document.querySelectorAll('.dot')[0].classList.add('active');
         } else {
-            slide.style.transform = 'translateX(100%)'; // All others are off-screen right by default
+            slide.style.transform = 'translateX(100%)';
             slide.style.opacity = '0';
             slide.style.zIndex = '0';
         }
     });
 
-    // Initialize first slide text overlay
+    // Initialize first slide content and text overlay
+    const initialSlideContent = document.querySelector('.slide-content[data-slide-index="0"]');
+    if (initialSlideContent) {
+        initialSlideContent.classList.add('active-content');
+    }
+
     const initialTextOverlay = slides[0].querySelector('.text-overlay');
     if (initialTextOverlay) {
-        initialTextOverlay.classList.add('small');
+        // Force reflow to ensure the transition works
+        initialTextOverlay.offsetHeight;
+        initialTextOverlay.classList.remove('small');
+        
+        textOverlayTimeout = setTimeout(() => {
+            initialTextOverlay.classList.add('small');
+        }, 6000);
     }
-    
-    // Add click listener to text overlays for size toggle
-    slides.forEach(slide => {
-        const textOverlay = slide.querySelector('.text-overlay');
-        if (textOverlay) {
-            textOverlay.addEventListener('click', () => {
-                textOverlay.classList.toggle('small');
-            });
-        }
-    });
-    
 });
 
 // Header scroll effect
