@@ -1,0 +1,374 @@
+/* Hero Section with Slider */
+.hero {
+    height: 80vh;
+    margin-top: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+}
+
+/* Add dark overlay for better text readability */
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 35%;
+    left: -20%;
+    width: 60%;
+    height: 80%;
+    background: rgba(0, 0, 0, 0.7);
+    filter: blur(100px);
+    z-index: 4; /* Lower z-index so it doesn't cover the image */
+    pointer-events: none;
+    border-radius: 50%; /* Make it circular */
+    opacity: 1; /* Always visible */
+}
+
+/* Add rectangular overlay spanning full width */
+.slide::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+    z-index: 4;
+    pointer-events: none;
+    opacity: 1; /* Always visible */
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+    transform: translateX(0);
+    display: block;
+}
+/*
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+} */
+
+.slide-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Show video when hovering over slide */
+.slide:hover .slide-video {
+    opacity: 0; /* Keep video hidden initially */
+    z-index: 1;
+}
+
+/* Show video only when it's actually playing */
+.slide.video-playing .slide-video {
+    opacity: 1;
+    z-index: 3; /* Higher than blur overlay when playing */
+}
+
+/* Hide main image only when video is playing */
+.slide.video-playing .main-image {
+    opacity: 0;
+    z-index: -1; /* Push image behind when video is playing */
+}
+
+/* Style for YouTube iframe */
+.slide iframe.slide-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none; /* Prevent interaction when not active */
+}
+
+/* Show iframe video on hover too */
+.slide:hover iframe.slide-video {
+    opacity: 1;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.slide.active .slide-video,
+.slide.active iframe.slide-video {
+    opacity: 1;
+    pointer-events: auto; /* Enable interaction when active */
+}
+
+.main-image {
+    width: 100%;
+    height: 110%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Above blur overlay */
+    transition: opacity 0.5s ease-in-out, z-index 0.5s ease-in-out;
+    /* Hardware acceleration */
+    will-change: opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.slide.active .main-image {
+    opacity: 0;
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.7);
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+.text-overlay {
+    position: absolute;
+    width: 38%;
+    top: 39%;
+    left: 2.5vw;
+    transform: translateY(-50%) scale(1);
+    transition: all 0.3s ease;
+    z-index: 5;
+    animation: moveToBottom 1.5s ease-in-out forwards;
+    animation-delay: 5s;
+    /* Hardware acceleration */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.text-overlay.small {
+    width: 20%;
+    top: 25%;
+    transform: translateY(0) scale(1);
+}
+
+.slide-content {
+    position: absolute;
+    left: 2.5vw;
+    bottom: 25vh;
+    display: flex;
+    gap: 1em;
+    z-index: 4;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.slide-description {
+    position: absolute;
+    left: 2.5vw;
+    bottom: 28vh;
+    color: white;
+    font-size: 1em;
+    max-width: 40%;
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    transition: all 0.3s ease;
+    animation: fadeOut 1.5s ease-out forwards;
+    animation-delay: 5s;
+    width: 30%;
+    z-index: 5;
+    /* Hardware acceleration */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+@keyframes moveToBottom {
+    0% {
+        width: 38%;
+        top: 39%;
+        transform: translateY(-50%);
+        left: 2.5vw;
+    }
+    100% {
+        width: 25%;
+        top: 25%;
+        transform: translateY(0);
+        left: 2.5vw;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(-50%);
+        width: 30%;
+        bottom: 28vh;
+        left: 2.5vw;
+        font-size: 1em;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+        width: 20%;
+        bottom: 28vh;
+        left: 2.5vw;
+        font-size: 0.7em;
+    }
+}
+
+.slide-content.active-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.play-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.play-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.slider-btn {
+    display: none;
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+}
+
+.slider-btn.prev {
+    left: 1.25em;
+}
+
+.slider-btn.next {
+    right: 1.25em;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 1.25em;
+    right: 2vw;
+    left: auto;
+    transform: none;
+    display: flex;
+    gap: 0.6em;
+    z-index: 10;
+}
+
+.dot {
+    width: 1.5em;
+    height: 0.25em;
+    border-radius: 0.125em;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.dot.active {
+    background: var(--primary-color);
+    width: 2em;
+}
+
+.size-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 3;
+    transition: background 0.3s ease;
+}
+
+.size-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.slide-nav-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+}
+
+.slide-nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.slide-nav-btn i {
+    font-size: 1.2em;
+}
+
+/* Responsive Design for Slider */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh;
+        padding: 0 1vw;
+    }
+
+    .hero-content h2 {
+        font-size: 1.5em;
+    }
+}

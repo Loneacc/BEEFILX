@@ -5,18 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEEFLIX - Xem phim trực tuyến</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
 
 <body>
     <header id="main-header">
         <nav class="navbar">
             <div class="logo">
-                <img src="/images/LogoBEEFLIX.png" alt="BEEFLIX Logo">
+                <img src="https://raw.githubusercontent.com/Loneacc/src-Beefilx/fbfa5bb6fcc9bfe003d07a76da98dc70aef0d859/image/LogoBEEFLIX.png"
+                    alt="BEEFLIX Logo">
             </div>
             <div class="nav-links">
-                <a href="#" class="active">Trang chủ</a>
+                <a href="index.html" class="active">Trang chủ</a>
                 <a href="#">Series</a>
                 <a href="#">Mới & Phổ biến</a>
                 <a href="#">Thể loại</a>
@@ -49,20 +53,17 @@
                 </button>
                 <div class="account-menu">
                     <button class="account-btn">
-                        <img src="https://i.pinimg.com/originals/fb/8e/8a/fb8e8a96fca2f049334f312086a6e2f6.png"
-                            alt="Account" class="avatar">
+                        <img src="images/56.png" alt="Account" class="avatar">
                         <i class="fas fa-caret-down"></i>
                     </button>
                     <div class="account-dropdown">
                         <div class="profiles">
                             <div class="profile-item">
-                                <img src="https://i.pinimg.com/originals/fb/8e/8a/fb8e8a96fca2f049334f312086a6e2f6.png"
-                                    alt="Profile 1">
+                                <img src="images/57.png" alt="Profile 1">
                                 <span>Hồ sơ 1</span>
                             </div>
                             <div class="profile-item">
-                                <img src="https://i.pinimg.com/originals/2e/2f/ac/2e2fac9d4a392456e511345021592dd2.jpg"
-                                    alt="Profile 2">
+                                <img src="images/58.png" alt="Profile 2">
                                 <span>Hồ sơ 2</span>
                             </div>
                         </div>
@@ -84,24 +85,53 @@
         <section class="hero">
             <div class="slider">
                 <div class="slide active">
-                    <img src="/images/han.png" alt="Han" class="main-image">
-                    <img src="/images/hantext.png" alt="Han Text" class="text-overlay text-overlay-1">
+                    <video class="slide-video" loop>
+                        <source src="video/Trung Tâm Chăm Sóc Chấn Thương Mùa 1 Trailer.mp4" type="video/mp4">
+                    </video>
+                    <img src="images/36.png" alt="trung tâm chăm sóc chấn thương" class="main-image">
+                    <img src="images/36-1.png" alt="trung tâm chăm sóc chấn thương" class="text-overlay text-overlay-1">
+                    <div class="slide-description">Một chuyên gia chấn thương trở về từ chiến trường, dùng phương pháp
+                        lạ để cứu sống nhiều bệnh nhân, nhưng lại khiến nội bộ bệnh viện mâu thuẫn và đấu đá quyền lực.
+                    </div>
                 </div>
                 <div class="slide">
-                    <img src="/images/aot.png" alt="Attack on Titan" class="main-image">
-                    <img src="/images/aottext.png" alt="AOT Text" class="text-overlay text-overlay-2">
+                    <video class="slide-video" muted loop>
+                        <source src="video/Attack on Titan Cuối Cùng Trailer.mp4" type="video/mp4">
+                    </video>
+                    <img src="images/37.png" alt="Attack on Titan" class="main-image">
+                    <img src="images/37-1.png" alt="Attack on Titan" class="text-overlay text-overlay-2">
+                    <div class="slide-description">Attack on Titan SS4 đẩy câu chuyện lên tầm cao mới, đầy kịch tính và
+                        đau thương. Các nhân vật rơi vào vòng xoáy chiến tranh, nơi không còn ranh giới giữa đúng và
+                        sai.</div>
                 </div>
                 <div class="slide">
-                    <img src="/images/wicked.png" alt="Wicked" class="main-image">
-                    <img src="/images/Wicked Movie Logo.png" alt="Wicked Text" class="text-overlay text-overlay-3">
+                    <video class="slide-video" muted loop>
+                        <source src="video/Solo Leveling Official Trailer.mp4" type="video/mp4">
+                    </video>
+                    <img src="images/38.png" alt="Solo Leveling" class="main-image">
+                    <img src="images/38-1.png" alt="Solo Leveling" class="text-overlay text-overlay-3">
+                    <div class="slide-description">Từ một kẻ yếu bị khinh thường, Sung Jin-woo dần trở thành Hunter mạnh
+                        mẽ bậc nhất qua hành trình sinh tồn đầy hiểm nguy, hành động mãn nhãn và những cú twist bất ngờ.
+                    </div>
                 </div>
                 <div class="slide">
-                    <img src="/images/sololvl.png" alt="Solo Leveling" class="main-image">
-                    <img src="/images/sololvltext.png" alt="Solo Leveling Text" class="text-overlay text-overlay-4">
+                    <video class="slide-video" muted loop>
+                        <source src="video/NHÀ GIA TIÊN ｜ TRAILER OFFICIAL ｜ Dự Kiến Khởi Chi.mp4" type="video/mp4">
+                    </video>
+                    <img src="images/39.png" alt="Nhà gia tiên" class="main-image">
+                    <img src="images/39-1.png" alt="Nhà gia tiên" class="text-overlay text-overlay-4">
+                    <div class="slide-description">Hồn ma một thanh niên mắc kẹt trong nhà tổ, cùng em gái khám phá sự
+                        thật về cái chết và những bí mật tâm linh, mâu thuẫn gia tộc bị chôn giấu sau nhiều năm.</div>
                 </div>
                 <div class="slide">
-                    <img src="/images/mai.png" alt="Mai" class="main-image">
-                    <img src="/images/maitext.png" alt="Mai Text" class="text-overlay text-overlay-5">
+                    <video class="slide-video" muted loop>
+                        <source src="video/FLOW Official US Trailer.mp4" type="video/mp4">
+                    </video>
+                    <img src="images/40.png" alt="Flow" class="main-image">
+                    <img src="images/40-1.png" alt="Flow" class="text-overlay text-overlay-5">
+                    <div class="slide-description">Một chú mèo sống sót sau tận thế, cùng nhóm bạn động vật vượt qua
+                        hiểm nguy, học cách yêu thương và dần khám phá tình bạn, hy vọng cùng sự kết nối giữa muôn loài.
+                    </div>
                 </div>
 
                 <!-- Slide Content (Buttons) -->
@@ -129,6 +159,11 @@
                 <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
                 <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
                 <div class="slider-dots"></div>
+
+                <div class="slide-nav-buttons">
+                    <button class="slide-nav-btn prev-slide"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slide-nav-btn next-slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </section>
 
@@ -204,8 +239,8 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4>Về BeeFlix</h4>
-                <p>BeeFlix là nền tảng xem phim trực tuyến hàng đầu Việt Nam</p>
+                <h4>Về BEEFLIX</h4>
+                <p>BEEFLIX là nền tảng xem phim trực tuyến hàng đầu Việt Nam</p>
             </div>
             <div class="footer-section">
                 <h4>Liên kết</h4>
@@ -223,12 +258,13 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 BeeFlix. All rights reserved.</p>
+            <p>&copy; 2024 BEEFLIX. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
-    <script src="/js/logincheck.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
